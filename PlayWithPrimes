@@ -1,0 +1,104 @@
+import java.util.*; 
+public class PlayWithPrimes
+{
+	//Initialize global variable
+	private static	ArrayList<ArrayList<Integer>> edges;
+	static int numMax;
+	
+	public static boolean isPrime(int n) { 
+		      // input value must be and integer 2 or greater
+		        if (n <= 1){
+		        	return false; 
+		        }
+		        // check if 2 - n-1 divides n
+		        for (int i = 2; i < n; i++) {
+		        	if (n % i == 0){
+		        		return false; 
+		        	}    
+		        } 
+		        //value is prime
+		        return true; 
+		    } // End method is prime
+		    
+//When called the static method prints the objective function constraint to minimize colors	
+	public static void printConstraint(){
+	System.out.println("min: +c_1+c_2+c_3+c_4+c_5+c_6+c_7+c_8+c_9+c_10+c_11+c_12;");
+	for(int i = 1; i< numMax; i++){
+		
+			System.out.println("c_" + (i+1) + "<=c_" + i + ";");
+		
+	}
+}// End method printConstant
+//Ensure vertex  is exactly one color
+	public static void printOneColor(){
+		for(int i = 1; i<= numMax; i++){
+				System.out.println("x_" + i + "_1 + " + "x_" + i + "_2 + "+ "x_" + i + "_3 + " + "x_" + i + "_4 + " + "x_" + i + "_5 + " + "x_" + i + "_6 + "+ "x_" + i + "_7 + "+ "x_" + i + "_8 + "+ "x_" + i + "_9 + "+ "x_" + i + "_10 + "+ "x_" + i + "_11 + "+ "x_" + i + "_12 = 1;");
+		}
+	}
+	// c variable must keep track to colors
+	public static void printConstraint2(){
+		for(int i = 1; i<=numMax; i++){
+			for(int j = 1; j<=numMax; j++){
+				System.out.println("x_"+j+"_"+i+"<=c_"+i+";");
+			}
+		}
+	}
+	
+	// all variables are binary 
+	public static void printBin(){
+		System.out.print("bin ");
+		for(int i = 1; i<=numMax; i++){
+			for(int j = 1; j<=numMax; j++){
+				System.out.print("x_"+i+"_"+j+", ");
+			}
+		}
+		for(int k = 1; k<=11;k++){
+		System.out.print("c_" + k + ", ");
+		}
+		System.out.print("c_12;\n");
+	}	
+	
+	public static void main(String[] args)
+	{
+		numMax = 12;
+		// initialize edge set 
+		edges = new ArrayList<ArrayList<Integer>>();
+		for(int i = 0; i <=numMax; i++){
+			edges.add(i, new ArrayList<Integer>());
+		}
+		
+		printConstraint();
+		printOneColor();
+		printConstraint2();
+		
+		for(int i = 1; i <=numMax; i++){
+			for(int j=i+1; j<=numMax; j++){
+				if(i!=j){
+			//	System.out.println("i = "+ i + " j = "+ j);
+			// calculate formula for edge
+				 int possiblePrime = i*j +5;
+			//	 System.out.println("i*j + 5 = " + possiblePrime);
+			// Check for primality
+				 boolean isPrime = isPrime(possiblePrime);
+					if(isPrime == true){
+					//add to array
+					edges.get(i).add(j);		
+					}
+				}
+			}
+		
+	}
+		
+		for(int i = 1; i<13;i++){
+			for(int k =1; k<13; k++){
+				for(int j = 0; j<edges.get(i).size(); j++){
+				System.out.println("x_" + i + "_"+ k +" + " +"x_" + edges.get(i).get(j) + "_"+ k + " <= 1;");
+				
+			}
+		}
+	}
+		printBin();
+		
+		
+	}  // End method: main(String[])
+}// End Class Definition: PlayWithPrimes
