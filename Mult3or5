@@ -1,0 +1,36 @@
+import java.util.*;
+
+
+public class Mult3or5
+{
+	private static	ArrayList<Integer> div3or5 = new ArrayList<>();
+	private final static int stopPoint = 1000;
+	public static void main(String[] args)
+	{
+		ArrayList<Integer> getMults = findMults(stopPoint);
+		System.out.println(sum(getMults));
+		
+	} // End method: main(String[])	
+	
+	//find the multiple values of natural numbers (1,2,3...) less than n
+	private static ArrayList<Integer> findMults(int n){
+		for (int i = 1; i < n; i++){
+			if(i%3 ==0 || i%5==0){
+				div3or5.add(i);
+			}
+			
+		}
+		return div3or5;
+	}
+	
+	//sum elements in ArrayList
+	private static int sum(ArrayList<Integer> arr){
+		int sum = 0;
+		for(int i =0; i<arr.size(); i++){
+			sum += arr.get(i);
+		}
+		return sum;	
+	}
+	
+	
+} // End Class Definition: Mult3or5
