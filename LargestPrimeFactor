@@ -1,0 +1,60 @@
+// Imported Packages
+// -----------------
+import java.math.BigInteger;
+import java.util.*;
+
+
+public class LargestPrimeFactor
+{
+	private static	ArrayList<BigInteger> primeFactors = new ArrayList<>();
+	static long check = 600851475143l;
+	static final BigInteger gottaFactor = new BigInteger("600851475143");
+	
+	public static void main(String[] args)
+	{
+		System.out.println(getMax(getPrimeFactor(check, gottaFactor)));
+	//	System.out.print(getPrimeFactor(check, gottaFactor));
+	} // End method: main(String[])		
+	
+	private static BigInteger getMax(ArrayList<BigInteger> arr){
+		BigInteger max = arr.get(0);
+		for(int i = 1; i< arr.size(); i++){
+			if(arr.get(i).compareTo(max) == 1){
+				max = arr.get(i);
+			}
+		}
+		return max;
+	}
+	
+	
+	private static ArrayList<BigInteger> getPrimeFactor(long intN, BigInteger n){
+		BigInteger bigTwo = new BigInteger("2");
+		
+		while(intN % 2 == 0){
+			System.out.println("here");
+			primeFactors.add(new BigInteger("2"));
+			intN /= 2;
+			n = n.divide(bigTwo);
+		
+		}
+		
+		for(int i = 3; i <= Math.ceil(Math.sqrt(intN)); i+=2){
+			BigInteger bigI = new BigInteger(Integer.toString(i));
+			while(intN % i == 0){
+				primeFactors.add(bigI);
+				intN /= i;
+				n = n.divide(bigI);
+			}
+			
+			if(intN < i){
+				System.out.println("here");
+				primeFactors.add(n);
+			}
+		}
+		return primeFactors;
+	}
+	
+	
+	
+	
+} // End Class Definition: LargestPrimeFactor
